@@ -43,5 +43,5 @@ function insertInArrayInPlace(
 };
 
 let arrayInOut = [ 8, 9 ];
-insertInArrayInPlace(arrayInOut, 3, "hi");
+insertInArrayInPlace(arrayInOut, 0, "hi");
 console.log(arrayInOut);
