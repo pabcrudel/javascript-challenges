@@ -24,8 +24,8 @@ function insertInArrayInPlace(
       }
       // Case 2: Is an Array
       else {
-      const length = arrayOrPrimitiveToInsert.length;
-      moveOriginalArrayIndex += length;
+        const length = arrayOrPrimitiveToInsert.length;
+        moveOriginalArrayIndex += length;
 
         for (let j = 0; j < length; j++)
           insertedArray[i + j] = arrayOrPrimitiveToInsert[j];
@@ -42,6 +42,6 @@ function insertInArrayInPlace(
   };
 };
 
-let arrayInOut = [ 8, 9];
+let arrayInOut = [ 8, 9 ];
 insertInArrayInPlace(arrayInOut, 3, "hi");
 console.log(arrayInOut);
