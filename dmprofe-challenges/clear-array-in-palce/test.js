@@ -16,6 +16,13 @@ const utArray = [
   ],
   [
     [
+      NaN, [undefined, ""], , [],
+      [ [null], {}, ],
+    ],
+    [[{}]],
+  ],
+  [
+    [
       , [undefined, null], , null,
       [ [null], null, ],
     ],
