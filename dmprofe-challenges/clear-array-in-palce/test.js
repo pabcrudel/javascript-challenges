@@ -23,8 +23,8 @@ const utArray = [
   ],
   [
     [
-      , [undefined, null], , null,
-      [ [null], null, ],
+      , [undefined, null], , NaN,
+      [ [""], null, ],
     ],
     [],
   ],
