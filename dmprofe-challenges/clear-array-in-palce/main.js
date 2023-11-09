@@ -3,7 +3,6 @@ cleanArrayInPlace(arrayIn);
 
 Removes the entries of the input array that have value null or undefined
 or "empty" entries.
-Does not assume array of primitives, but does not work recursively.
 */
 export default function cleanArrayInPlace(arrayIn) {
   /** Infinite loop locker because of recursive function. */
