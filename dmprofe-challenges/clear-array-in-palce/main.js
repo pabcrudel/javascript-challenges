@@ -11,17 +11,23 @@ export default function cleanArrayInPlace(arrayIn) {
   for (let i = 0; i < arrayIn.length;) {
     const item = arrayIn[i];
 
-    if (item === null || (typeof item !== 'object' && !item)) {
+    if (
+      item === null
+      || (typeof item !== 'object' && !item)
+      || (Array.isArray(item) && !item.length)
+    ) {
       const length = arrayIn.length;
 
       // Move each item 1 position left and delete last array item.
       for (let j = i; j < length; j++) arrayIn[j] = arrayIn[j + 1];
       arrayIn.length = length - 1;
+      
+      hasPassed = false; // Restore locker.
     }
     // Recursive function call to clean arrays
     else if (!hasPassed && Array.isArray(item)) {
       cleanArrayInPlace(item)
-      hasPassed = true;
+      hasPassed = true; // Lock recursive call.
     }
     else {
       i++; // Index only is increase if is a valid value.
