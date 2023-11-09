@@ -10,7 +10,7 @@ export default function cleanArrayInPlace(arrayIn) {
   for (let i = 0; i < arrayIn.length;) {
     const item = arrayIn[i];
 
-    if (item === null || !item || item.length === 0) {
+    if (!item || item.length === 0) {
       const length = arrayIn.length;
 
       // Move each item 1 position left and delete last array item.
