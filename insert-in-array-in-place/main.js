@@ -1,5 +1,3 @@
-"use strict";
-
 /*
 insertInArrayInPlace(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
 
@@ -7,7 +5,7 @@ Same as `insert-in-array.js`, but modifies the input array in place,
 and does not return anything.
 */
 
-function insertInArrayInPlace(
+export default function insertInArrayInPlace(
   arrayInOut, indexThatIsBefore, arrayOrPrimitiveToInsert
 ) {
   let insertedArray = [];
@@ -18,7 +16,10 @@ function insertInArrayInPlace(
     // Insert item
     if (i === position) {
       // Case 1: Is a primitive value
-      if (typeof arrayOrPrimitiveToInsert !== 'object') {
+      if (
+        typeof arrayOrPrimitiveToInsert !== 'object' ||
+        arrayOrPrimitiveToInsert === null
+      ) {
         insertedArray[i] = arrayOrPrimitiveToInsert;
         moveOriginalArrayIndex++;
       }
@@ -41,7 +42,3 @@ function insertInArrayInPlace(
     arrayInOut[i] = insertedArray[i];
   };
 };
-
-let arrayInOut = [ 8, 9 ];
-insertInArrayInPlace(arrayInOut, 0, "hi");
-console.log(arrayInOut);

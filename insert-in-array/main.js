@@ -1,5 +1,3 @@
-"use strict";
-
 /*
 insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
 
@@ -10,7 +8,7 @@ other array).
 Assume that the arrays are of primitives.
 */
 
-function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
+export default function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
   let insertedArray = [];
   const position = indexThatIsBefore + 1;
   let moveOriginalArrayIndex = 0;
@@ -22,7 +20,10 @@ function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
     // Insert item
     if (i === position) {
       // Case 1: Is a primitive value
-      if (typeof arrayOrPrimitiveToInsert !== 'object') {
+      if (
+        typeof arrayOrPrimitiveToInsert !== 'object' ||
+        arrayOrPrimitiveToInsert === null
+      ) {
         insertedArray[i] = arrayOrPrimitiveToInsert;
         moveOriginalArrayIndex++;
       }
@@ -41,10 +42,3 @@ function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
   };
   return insertedArray;
 };
-
-let arrayOut = insertInArray([ true, "hi", 4, "yes", null, 8 ], 3, "bye");
-console.log(arrayOut);
-
-let arrayOut2 =
-  insertInArray([ true, "hi", 4, "yes", null, 8 ], 3, ["bye", 3]);
-console.log(arrayOut2);
