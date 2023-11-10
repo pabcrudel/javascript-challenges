@@ -57,7 +57,7 @@ function ut(title, uts, utFunction) {
     const status = equality === expected;
     const statusLog = status ? "Pass" : "Fail";
 
-    console.log(`| ${i + 1} | ${statusLog} | `,JSON.stringify(arr1, null, 0),
+    console.log(`| ${i + 1} | ${statusLog} |`,JSON.stringify(arr1, null, 0),
       "|",JSON.stringify(arr2, null, 0),`| ${expected} | ${equality} |`);
 
     // Because of "!", True = 0 & False = 1;
