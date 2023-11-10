@@ -54,8 +54,8 @@ const utArray = [
 console.log("# Unit Testing: Insert in Array\n");
 console.log(
   "Disclaimer: In order to see the array in one line, it has been " +
-  "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
-  " \`NaN\` and \`undefined\` into \`null\`.\n"
+  "used \`JSON.stringify\` which transforms \`<empty slot>\`, " +
+  " into \`undefined\`.\n"
 );
 ut("Insert in Array", utArray, 1);
 console.log();

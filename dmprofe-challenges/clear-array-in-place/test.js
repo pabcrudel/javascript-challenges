@@ -38,8 +38,8 @@ const utArray = [
 console.log("# Unit Testing: Clean Array\n");
 console.log(
   "Disclaimer: In order to see the array in one line, it has been " +
-  "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
-  " \`NaN\` and \`undefined\` into \`null\`.\n"
+  "used \`JSON.stringify\` which transforms \`<empty slot>\`, " +
+  " into \`undefined\`.\n"
 );
 ut("Clean Array Recursively", utArray, cleanArrayInPlace);
 
