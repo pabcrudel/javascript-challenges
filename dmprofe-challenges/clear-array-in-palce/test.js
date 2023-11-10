@@ -1,6 +1,9 @@
 "use strict";
 
 const { cleanArrayInPlace } = require('./main.js');
+const { areStrictEqualPrimitiveArrays } =
+  require('../../utils/are-equal-arrays/main.js');
+const { stringifyArray } = require('../../utils/stringify-array/main.js');
 
 /** Unit Testings
  * - [0] Raw Array
@@ -32,13 +35,37 @@ const utArray = [
   ],
 ];
 
-const length = utArray.length;
-for (let i = 0; i < length; i++) {
-  console.log(`Test number: ${i + 1}`);
-  const test = utArray[i][0];
-  console.log("Original array: ", test);
+console.log("# Unit Testing: Clean Array\n");
+console.log(
+  "Disclaimer: In order to see the array in one line, it has been " +
+  "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
+  " \`NaN\` and \`undefined\` into \`null\`.\n"
+);
+ut("Clean Array Recursively", utArray, cleanArrayInPlace);
 
-  cleanArrayInPlace(test);
-  console.log("Cleaned array: ", test);
-  console.log("Expected array: ", utArray[i][1], "\n");
+function ut(title, uts, utFunction) {
+  console.log(`## UT: ${title}\n`);
+  console.log("| Number | Status | Original Arr | Expected Arr | Result Arr |");
+  console.log("|-|-|-|-|-|");
+
+  let failCounter = 0;
+  for (let i = 0; i < uts.length; i++) {
+    const ut = uts[i];
+
+    const originalArr = ut[0],
+      expected = ut[1];
+
+    const result = [...originalArr];
+    utFunction(result);
+
+    const status = areStrictEqualPrimitiveArrays(expected, result);
+    const statusLog = status ? "Pass" : "Fail";
+
+    console.log(`| ${i + 1} | ${statusLog} |`,stringifyArray(originalArr),
+      "|",stringifyArray(expected),"|",stringifyArray(result));
+
+    // Because of "!", True = 0 & False = 1;
+    failCounter += !status;
+  };
+  console.log("Fails:", failCounter);
 };
