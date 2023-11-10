@@ -7,7 +7,11 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
   // If they have different lengths, they aren't equals.
   if (len1 !== len2) return false;
 
-  // If both are Arrays or Objects, they are equals.
+  /** If both are Arrays or Objects, they are equals.
+    - Why `item1.length === item2.length`:
+        - `Object.length => undefined` !== `Array.length => number`
+        - `Array.length => 5` !== `Array.length => 7`
+  */
   const objectValidation = (item1, item2) =>
     (typeof item1 === 'object' && item1 !== null)
     && (typeof item2 === 'object' && item2 !== null)
