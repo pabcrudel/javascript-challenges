@@ -12,35 +12,25 @@ Assume that the arrays are of primitives.
 
 function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
   let insertedArray = [];
-  const position = indexThatIsBefore + 1;
-  let moveOriginalArrayIndex = 0;
 
-  for (let i = 0; i < arrayIn.length; i++) {
-    // Insert items of arrayIn before position
-    if (i <= indexThatIsBefore) insertedArray[i] = arrayIn[i];
+  for (let i = 0, j = 0; i < arrayIn.length; i++, j++) {
+    insertedArray[j] = arrayIn[i];
 
     // Insert item
-    if (i === position) {
+    if (i === indexThatIsBefore) {
       // Case 1: Is a primitive value
       if (
         typeof arrayOrPrimitiveToInsert !== 'object' ||
         arrayOrPrimitiveToInsert === null
       ) {
-        insertedArray[i] = arrayOrPrimitiveToInsert;
-        moveOriginalArrayIndex++;
+        insertedArray[++j] = arrayOrPrimitiveToInsert;
       }
       // Case 2: Is an Array
       else {
-      const length = arrayOrPrimitiveToInsert.length;
-      moveOriginalArrayIndex += length;
-
-        for (let j = 0; j < length; j++)
-          insertedArray[i + j] = arrayOrPrimitiveToInsert[j];
+        for (let k = 0; k < arrayOrPrimitiveToInsert.length; k++)
+          insertedArray[++j] = arrayOrPrimitiveToInsert[k];
       };
     };
-
-    // Insert rest of arrayIn
-    if (i >= position) insertedArray[i + moveOriginalArrayIndex] = arrayIn[i];
   };
   return insertedArray;
 };
@@ -57,9 +47,8 @@ function insertInArrayInPlace(
 ) {
   let insertedArray = [];
   const position = indexThatIsBefore + 1;
-  let moveOriginalArrayIndex = 0;
 
-  for (let i = position; i < arrayInOut.length; i++) {
+  for (let i = position, j = 0; i < arrayInOut.length; i++) {
     // Insert item
     if (i === position) {
       // Case 1: Is a primitive value
@@ -68,21 +57,18 @@ function insertInArrayInPlace(
         arrayOrPrimitiveToInsert === null
       ) {
         insertedArray[i] = arrayOrPrimitiveToInsert;
-        moveOriginalArrayIndex++;
+        j++;
       }
       // Case 2: Is an Array
       else {
-        const length = arrayOrPrimitiveToInsert.length;
-        moveOriginalArrayIndex += length;
-
-        for (let j = 0; j < length; j++)
+        for (; j < arrayOrPrimitiveToInsert.length; j++)
           insertedArray[i + j] = arrayOrPrimitiveToInsert[j];
       };
     };
 
     // Insert rest of arrayIn
     if (i >= position)
-      insertedArray[i + moveOriginalArrayIndex] = arrayInOut[i];
+      insertedArray[i + j] = arrayInOut[i];
   };
 
   for (let i = position; i < insertedArray.length; i++) {
