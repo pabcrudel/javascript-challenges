@@ -8,7 +8,7 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
   if (len1 !== len2) return false;
 
   // If both are Arrays or Objects, they are equals.
-  const objectIgnoreCondition = (item1, item2) =>
+  const objectValidation = (item1, item2) =>
     (typeof item1 === 'object' && item1 !== null)
     && (typeof item2 === 'object' && item2 !== null)
     && item1.length === item2.length ? false : true;
@@ -24,7 +24,7 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
     const item2 = arr2[i];
 
     if (
-      objectIgnoreCondition(item1, item2)
+      objectValidation(item1, item2)
       && nanValidation(item1, item2)
       && item1 !== item2
     ) return false;
