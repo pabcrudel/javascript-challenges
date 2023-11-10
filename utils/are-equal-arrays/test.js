@@ -64,5 +64,5 @@ function ut(title, uts, utFunction) {
     // Because of "!", True = 0 & False = 1;
     failCounter += !status;
   };
-  console.log("Fails:", failCounter);
+  console.log("\nFails:", failCounter);
 };

@@ -102,5 +102,5 @@ function ut(title, uts, functionType) {
     // Because of "!", True = 0 & False = 1;
     failCounter += !equality;
   };
-  console.log(`Fails: ${failCounter}`);
+  console.log(`\nFails: ${failCounter}`);
 };
