@@ -23,9 +23,20 @@ const utArray = [
   [ [{}], [[]], false ],
   [ [[]], [2], false ],
   [ [{}], [3], false ],
+  [ [,], [,], true ],
+  [
+    [ true, null, "hi", 4, "yes", null, 8 ],
+    [ true, null, "hi", 4, "yes", null, 8 ],
+    true
+  ]
 ];
 
 console.log("# Unit Testing: Equal Array\n");
+console.log(
+  "Disclaimer: In order to see the array in one line, it has been " +
+  "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
+  " \`NaN\` and \`undefined\` into \`null\`.\n"
+);
 ut("Are strict equal primitive Array", utArray, areStrictEqualPrimitiveArrays);
 
 function ut(title, uts, utFunction) {
@@ -44,10 +55,10 @@ function ut(title, uts, utFunction) {
 
     const expected = ut[2];
     const status = equality === expected;
-    const statusLog = status ?  "Pass" : "Fail";
+    const statusLog = status ? "Pass" : "Fail";
 
-    console.log(`| ${i} | ${statusLog} |`,arr1,"|",arr2,
-      `| ${expected} | ${equality} |`);
+    console.log(`| ${i + 1} | ${statusLog} | `,JSON.stringify(arr1, null, 0),
+      "|",JSON.stringify(arr2, null, 0),`| ${expected} | ${equality} |`);
 
     // Because of "!", True = 0 & False = 1;
     failCounter += !status;
