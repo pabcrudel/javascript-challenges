@@ -1,3 +1,5 @@
+"use strict";
+
 /*
 insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
 
@@ -8,7 +10,7 @@ other array).
 Assume that the arrays are of primitives.
 */
 
-export default function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
+function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
   let insertedArray = [];
   const position = indexThatIsBefore + 1;
   let moveOriginalArrayIndex = 0;
@@ -41,4 +43,8 @@ export default function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimiti
     if (i >= position) insertedArray[i + moveOriginalArrayIndex] = arrayIn[i];
   };
   return insertedArray;
+};
+
+module.exports = {
+  insertInArray
 };

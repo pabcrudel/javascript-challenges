@@ -1,10 +1,12 @@
+"use strict";
+
 /**
 cleanArrayInPlace(arrayIn);
 
 Removes the entries of the input array that have value null or undefined
 or "empty" entries.
 */
-export default function cleanArrayInPlace(arrayIn) {
+function cleanArrayInPlace(arrayIn) {
   /** Infinite loop locker because of recursive function. */
   let hasPassed = false;
   for (let i = 0; i < arrayIn.length;) {
@@ -30,4 +32,8 @@ export default function cleanArrayInPlace(arrayIn) {
       hasPassed = false; // Restore locker.
     };
   }
+};
+
+module.exports = {
+  cleanArrayInPlace
 };

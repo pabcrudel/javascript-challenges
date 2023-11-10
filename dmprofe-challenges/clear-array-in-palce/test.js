@@ -1,4 +1,6 @@
-import cleanArrayInPlace from './main.js';
+"use strict";
+
+const { cleanArrayInPlace } = require('./main.js');
 
 /** Unit Testings
  * - [0] Raw Array

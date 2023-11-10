@@ -1,3 +1,5 @@
+"use strict";
+
 /*
 insertInArrayInPlace(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
 
@@ -5,7 +7,7 @@ Same as `insert-in-array.js`, but modifies the input array in place,
 and does not return anything.
 */
 
-export default function insertInArrayInPlace(
+function insertInArrayInPlace(
   arrayInOut, indexThatIsBefore, arrayOrPrimitiveToInsert
 ) {
   let insertedArray = [];
@@ -41,4 +43,8 @@ export default function insertInArrayInPlace(
   for (let i = position; i < insertedArray.length; i++) {
     arrayInOut[i] = insertedArray[i];
   };
+};
+
+module.exports = {
+  insertInArrayInPlace
 };

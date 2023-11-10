@@ -1,4 +1,6 @@
-import insertInArrayInPlace from "./main.js";
+"use strict";
+
+const { insertInArrayInPlace } = require('./main.js');
 
 /** Unit Testings
  * - [0] Raw Array
