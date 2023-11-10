@@ -1,7 +1,7 @@
 "use strict";
 
 const { insertInArray, insertInArrayInPlace } = require('./main.js');
-const { areStrictEqualPrimitiveArrays } =
+const { areStrictEqualArraysNonRecursive } =
   require('../../utils/are-equal-arrays/main.js');
 const { stringifyArray } = require('../../utils/stringify-array/main.js');
 
@@ -89,7 +89,7 @@ function ut(title, uts, functionType) {
         break;
     };
 
-    const equality = areStrictEqualPrimitiveArrays(expected, result);
+    const equality = areStrictEqualArraysNonRecursive(expected, result);
     const statusLog = equality ?  "Pass" : "Fail";
 
     console.log(

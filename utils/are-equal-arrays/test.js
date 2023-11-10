@@ -1,14 +1,19 @@
 "use strict";
 
-const { areStrictEqualPrimitiveArrays } = require('./main.js');
+const { areStrictEqualArraysNonRecursive } = require('./main.js');
 const { stringifyArray } = require('../stringify-array/main.js');
+
+const utObj1 = { a: 3, b: "", c: null };
+const utObj2 = { a: 3, b: "", c: null };
+const utArray1 = [ "Unit", "Testing" ];
+const utArray2 = [ "Unit", "Testing" ];
 
 /** Equality Unit Testings
  * - [0]: Arr 1
  * - [1]: Arr 2
  * - [3]: Expected Equality
  */
-const utArray = [
+const utBattery = [
   [ [1, 2, 3, 4], [1, 2, 3, 4], true ],
   [ [1, null, 3, 4], [1, 2, 3, 4], false ],
   [ [1, 2, 3], [1, 2, 3, 4], false ],
@@ -18,9 +23,12 @@ const utArray = [
   [ ["Hello", "world"], ["Hello", "UT"], false ],
   [ ["Pablo", "Cru"], ["Pablo", "Cru"], true ],
   [ [undefined, true], [undefined, true], true ],
-  [ [[]], [[]], true ],
-  [ [{}], [{}], true ],
-  [ [[]], [{}], false ],
+  [ [{}], [{}], false ],
+  [ [utObj1], [utObj1], true ],
+  [ [utObj1], [utObj2], false ],
+  [ [[]], [[]], false ],
+  [ [utArray1], [utArray1], true ],
+  [ [utArray2], [utArray1], false ],
   [ [{}], [[]], false ],
   [ [[]], [2], false ],
   [ [{}], [3], false ],
@@ -38,7 +46,11 @@ console.log(
   "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
   " \`NaN\` and \`undefined\` into \`null\`.\n"
 );
-ut("Are strict equal primitive Array", utArray, areStrictEqualPrimitiveArrays);
+ut(
+  "Are strict equal primitive Array",
+  utBattery,
+  areStrictEqualArraysNonRecursive
+);
 
 function ut(title, uts, utFunction) {
   console.log(`## UT: ${title}\n`);
