@@ -11,12 +11,12 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
   const objectValidation = (item1, item2) =>
     (typeof item1 === 'object' && item1 !== null)
     && (typeof item2 === 'object' && item2 !== null)
-    && item1.length === item2.length ? false : true;
+    && item1.length === item2.length;
 
   // If both are numbers and NaN, they are equals.
   const nanValidation = (item1, item2) =>
   (typeof item1 === 'number' && isNaN(item1))
-  && (typeof item2 === 'number' && isNaN(item2)) ? false : true;
+  && (typeof item2 === 'number' && isNaN(item2));
 
   // If there are any item which is different, they aren't equals.
   for (let i = 0; i < len1; i++) {
@@ -24,8 +24,8 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
     const item2 = arr2[i];
 
     if (
-      objectValidation(item1, item2)
-      && nanValidation(item1, item2)
+      !objectValidation(item1, item2)
+      && !nanValidation(item1, item2)
       && item1 !== item2
     ) return false;
   }
