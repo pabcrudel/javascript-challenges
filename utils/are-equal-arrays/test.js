@@ -12,10 +12,11 @@ const utArray2 = [ "Unit", "Testing" ];
  * - [0]: Arr 1
  * - [1]: Arr 2
  * - [3]: Expected Equality
+ * - [4]: Description
  */
 const utBattery = [
-  [ [1, 2, 3, 4], [1, 2, 3, 4], true ],
-  [ [1, null, 3, 4], [1, 2, 3, 4], false ],
+  [ [1, 2, 3, 4], [1, 2, 3, 4], true, ],
+  [ [1, null, 3, 4], [1, 2, 3, 4], false, ],
   [ [1, 2, 3], [1, 2, 3, 4], false ],
   [ [1, 2, NaN], [1, 2, 3], false ],
   [ [1, 2, NaN], [1, 2, NaN], true ],
@@ -23,16 +24,16 @@ const utBattery = [
   [ ["Hello", "world"], ["Hello", "UT"], false ],
   [ ["Pablo", "Cru"], ["Pablo", "Cru"], true ],
   [ [undefined, true], [undefined, true], true ],
-  [ [{}], [{}], false ],
-  [ [utObj1], [utObj1], true ],
-  [ [utObj1], [utObj2], false ],
-  [ [[]], [[]], false ],
-  [ [utArray1], [utArray1], true ],
-  [ [utArray2], [utArray1], false ],
+  [ [{}], [{}], false, "Empty objects declared inside the array" ],
+  [ [utObj1], [utObj1], true, "Same object declared at the beginning" ],
+  [ [utObj1], [utObj2], false, "Different object but same properties" ],
+  [ [[]], [[]], false, "Empty arrays declared inside the array" ],
+  [ [utArray1], [utArray1], true, "Same arrays declared at the beginning" ],
+  [ [utArray2], [utArray1], false, "Different arrays but same properties" ],
   [ [{}], [[]], false ],
   [ [[]], [2], false ],
   [ [{}], [3], false ],
-  [ [,], [,], true ],
+  [ [,], [,], true, "2 `<empty slot>` in different arrays" ],
   [
     [ true, null, "hi", 4, "yes", null, 8 ],
     [ true, null, "hi", 4, "yes", null, 8 ],
