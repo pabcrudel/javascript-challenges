@@ -18,7 +18,7 @@ function areStrictEqualPrimitiveArrays(arr1, arr2) {
   (typeof item1 === 'number' && isNaN(item1))
   && (typeof item2 === 'number' && isNaN(item2)) ? false : true;
 
-  // If there are any item witch is different, they aren't equals.
+  // If there are any item which is different, they aren't equals.
   for (let i = 0; i < len1; i++) {
     const item1 = arr1[i];
     const item2 = arr2[i];
