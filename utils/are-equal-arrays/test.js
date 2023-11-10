@@ -1,6 +1,7 @@
 "use strict";
 
 const { areStrictEqualPrimitiveArrays } = require('./main.js');
+const { stringifyArray } = require('../stringify-array/main.js');
 
 /** Equality Unit Testings
  * - [0]: Arr 1
@@ -57,8 +58,8 @@ function ut(title, uts, utFunction) {
     const status = equality === expected;
     const statusLog = status ? "Pass" : "Fail";
 
-    console.log(`| ${i + 1} | ${statusLog} |`,JSON.stringify(arr1, null, 0),
-      "|",JSON.stringify(arr2, null, 0),`| ${expected} | ${equality} |`);
+    console.log(`| ${i + 1} | ${statusLog} |`,stringifyArray(arr1),
+      "|",stringifyArray(arr2),`| ${expected} | ${equality} |`);
 
     // Because of "!", True = 0 & False = 1;
     failCounter += !status;

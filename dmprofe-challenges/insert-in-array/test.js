@@ -3,6 +3,7 @@
 const { insertInArray, insertInArrayInPlace } = require('./main.js');
 const { areStrictEqualPrimitiveArrays } =
   require('../../utils/are-equal-arrays/main.js');
+const { stringifyArray } = require('../../utils/stringify-array/main.js');
 
 
 /** Unit Testings
@@ -92,10 +93,10 @@ function ut(title, uts, functionType) {
     const statusLog = equality ?  "Pass" : "Fail";
 
     console.log(
-      `| ${i + 1} | ${statusLog} |`,JSON.stringify(originalArr, null, 0),
-      `| ${indexBefore} |`,JSON.stringify(insert, null, 0),"|",
-      JSON.stringify(expected, null, 0), "|",
-      JSON.stringify(result, null, 0), "|"
+      `| ${i + 1} | ${statusLog} |`,stringifyArray(originalArr),
+      `| ${indexBefore} |`,stringifyArray(insert),"|",
+      stringifyArray(expected), "|",
+      stringifyArray(result), "|"
     );
 
     // Because of "!", True = 0 & False = 1;
