@@ -5,8 +5,14 @@ const { stringifyArray } = require('../stringify-array/main.js');
 
 const utObj1 = { a: 3, b: "", c: null };
 const utObj2 = { a: 3, b: "", c: null };
-const utArray1 = [ "Unit", "Testing" ];
-const utArray2 = [ "Unit", "Testing" ];
+const utObj3 = utObj1;
+const utArr1 = [ "Daniel", "Pablo" ];
+const utArr2 = [ "Daniel", "Pablo" ];
+const utArr3 = utArr1;
+
+const utArr4 = [utObj1, 3];
+const utArr5 = [utObj2, 3];
+const utArr6 = [utObj3, 3];
 
 /** Equality Unit Testings
  * - [0]: Arr 1
@@ -27,9 +33,13 @@ const utBattery = [
   [ [{}], [{}], false, "Empty objects declared inside the array" ],
   [ [utObj1], [utObj1], true, "Same object declared at the beginning" ],
   [ [utObj1], [utObj2], false, "Different object but same properties" ],
+  [ [utObj1], [utObj3], true, "Object 3 is assigned from object 1" ],
   [ [[]], [[]], false, "Empty arrays declared inside the array" ],
-  [ [utArray1], [utArray1], true, "Same arrays declared at the beginning" ],
-  [ [utArray2], [utArray1], false, "Different arrays but same properties" ],
+  [ [utArr1], [utArr1], true, "Same arrays declared at the beginning" ],
+  [ [utArr2], [utArr1], false, "Different arrays but same properties" ],
+  [ [utArr1], [utArr3], true, "Array 3 is assigned from array 1" ],
+  [ utArr4, utArr5, false, "Objects with different memory addresses" ],
+  [ utArr4, utArr6, true, "Objects with same memory addresses" ],
   [ [{}], [[]], false ],
   [ [[]], [2], false ],
   [ [{}], [3], false ],
@@ -44,8 +54,8 @@ const utBattery = [
 console.log("# Unit Testing: Equal Array\n");
 console.log(
   "Disclaimer: In order to see the array in one line, it has been " +
-  "used \`JSON.stringify(arr, null, 0)\` which transforms \`<empty slot>\`, " +
-  " \`NaN\` and \`undefined\` into \`null\`.\n"
+  "used \`JSON.stringify\` which transforms \`<empty slot>\`, " +
+  " into \`undefined\`.\n"
 );
 ut(
   "Are strict equal primitive Array",
