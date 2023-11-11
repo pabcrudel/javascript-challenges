@@ -1,10 +1,10 @@
 "use strict";
 
 /** Stringify arrays in JSON format avoiding Markdown rendering errors and
- * nullish values wrong representations. */
+ * represent as `null` any type not supported by JSON*/
 function stringifyArray(arr) {
   const stringArr =
-    JSON.stringify(arr, (key, value) => stringifyNullish(value), 0);
+    JSON.stringify(arr, (key, value) => stringifyNotSupportedTypes(value), 0);
 
   /**
    * Markdown output table renders `[[<content>]]` as a broken link. In order
@@ -16,10 +16,13 @@ function stringifyArray(arr) {
   return stringArr.replace(brokenLink, "[ [$1] ]");
 };
 
-/** JSON.stringify() changes all nullish values into null. However, in order to
- * display these values, a string that represents them will be returned. */
-function stringifyNullish(value) {
+/** JSON.stringify() changes all types that don't support into null.
+ * However, in order to display these ones, a string that represents them will
+ * be returned. */
+function stringifyNotSupportedTypes(value) {
   if (typeof value === 'undefined') return "undefined";
+
+  if (typeof value === "bigint") return `${value}n`;
 
   /* Is being used `Number.isNaN()` because
     `isNaN()` casts strings into numbers:
