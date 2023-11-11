@@ -6,7 +6,6 @@ const { areStrictEqualArraysNonRecursive } =
 const { stringifyArray } = require('../../utils/stringify-array/main.js');
 const { utsFunction } = require("../../utils/unit-testings/main.js");
 
-
 /** Unit Testings
  * - [0] Raw Array
  * - [1] indexThatIsBefore
@@ -57,7 +56,7 @@ const utOutputHeadings = [
   "arrayOrPrimitiveToInsert", "Expected Array", "Result",
 ];
 
-function insetUtFunction(testNumber, utItem, fnVersion) {
+function insertUtFunction(testNumber, utItem, fnVersion) {
   const [ originalArr, indexBefore, insert, expected ] = utItem;
 
   let result;
@@ -91,12 +90,12 @@ const utsData = [
   {
     utTitle: "Return new array",
     utOutputHeadings,
-    utFunction: (testNumber, utItem) => insetUtFunction(testNumber, utItem, 1),
+    utFunction: (testNumber, utItem) => insertUtFunction(testNumber, utItem, 1),
   },
   {
     utTitle: "Insert in place",
     utOutputHeadings,
-    utFunction: (testNumber, utItem) => insetUtFunction(testNumber, utItem, 2),
+    utFunction: (testNumber, utItem) => insertUtFunction(testNumber, utItem, 2),
   }
 ];
 utsFunction(utsTitle, utsBattery, utsData);
