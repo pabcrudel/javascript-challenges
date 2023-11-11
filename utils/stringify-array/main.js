@@ -19,9 +19,16 @@ function stringifyArray(arr) {
 /** JSON.stringify() changes all nullish values into null. However, in order to
  * display these values, a string that represents them will be returned. */
 function stringifyNullish(value) {
-  if (Number.isNaN(value)) return "NaN";
-  
   if (typeof value === 'undefined') return "undefined";
+
+  /* Is being used `Number.isNaN()` because
+    `isNaN()` casts strings into numbers:
+      - Number.isNaN("asdf") => false;
+      - Number.isNaN(+"asdf") => true;
+      - isNaN("asdf") => true;
+      - isNaN(+"asdf") => true;
+  */
+  if (Number.isNaN(value)) return "NaN";
 
   return value;
 };
