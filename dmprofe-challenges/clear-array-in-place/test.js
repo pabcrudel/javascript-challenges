@@ -4,68 +4,53 @@ const { cleanArrayInPlace } = require('./main.js');
 const { areStrictEqualArraysNonRecursive } =
   require('../../utils/are-equal-arrays/main.js');
 const { stringifyArray } = require('../../utils/stringify-array/main.js');
+const { utsFunction } = require("../../utils/unit-testings/main.js");
 
 /** Unit Testings
  * - [0] Raw Array
  * - [1] Expected Clean Array
  */
-const utArray = [
+const utsBattery = [
   [
     [
       3, , [2,4,undefined, null], , 4, undefined, 5, null,
       { a: 6 }, [ 7, 8, [null], null, 9 ], 10
     ],
-    [
-      3, [2,4], 4, 5, { a: 6 }, [ 7, 8, 9 ], 10
-    ]
+    [3, [2,4], 4, 5, { a: 6 }, [ 7, 8, 9 ], 10]
   ],
   [
-    [
-      NaN, [undefined, ""], , [],
-      [ [null], {}, ],
-    ],
+    [NaN, [undefined, ""], , [],[ [null], {}, ],],
     [[{}]],
   ],
   [
-    [
-      , [undefined, null], , NaN,
-      [ [""], null, ],
-    ],
+    [, [undefined, null], , NaN,[ [""], null, ],],
     [],
   ],
 ];
-
-console.log("# Unit Testing: Clean Array\n");
-console.log(
-  "Disclaimer: In order to see the array in one line, it has been " +
-  "used \`JSON.stringify\` which transforms \`<empty slot>\`, " +
-  " into \`undefined\`.\n"
-);
-ut("Clean Array Recursively", utArray, cleanArrayInPlace);
-
-function ut(title, uts, utFunction) {
-  console.log(`## UT: ${title}\n`);
-  console.log("| Number | Status | Original Arr | Expected Arr | Result Arr |");
-  console.log("|-|-|-|-|-|");
-
-  let failCounter = 0;
-  for (let i = 0; i < uts.length; i++) {
-    const ut = uts[i];
-
-    const originalArr = ut[0],
-      expected = ut[1];
-
-    const result = [...originalArr];
-    utFunction(result);
-
-    const status = areStrictEqualArraysNonRecursive(expected, result);
-    const statusLog = status ? "Pass" : "Fail";
-
-    console.log(`| ${i + 1} | ${statusLog} |`,stringifyArray(originalArr),
-      "|",stringifyArray(expected),"|",stringifyArray(result));
-
-    // Because of "!", True = 0 & False = 1;
-    failCounter += !status;
-  };
-  console.log("\nFails:", failCounter);
-};
+const utsTitle = "Clean Array";
+const utsData = [
+  {
+    utTitle: "Deep cleaning (recursive)",
+    utOutputHeadings: [
+      "Number", "Status", "Original Arr", "Expected Arr", "Result Arr",
+    ],
+    utFunction: function(testNumber, utItem){
+      const [ originalArr, expected ] = utItem;
+  
+      const result = [...originalArr];
+      cleanArrayInPlace(result);
+  
+      const status = areStrictEqualArraysNonRecursive(expected, result);
+      const statusLog = status ? "Pass" : "Fail";
+  
+      console.log(`| ${testNumber} | ${statusLog} |`,
+        stringifyArray(originalArr), "|",stringifyArray(expected),"|",
+        stringifyArray(result)
+      );
+  
+      // Because of "!", True = 0 & False = 1;
+      return !status;
+    },
+  }
+];
+utsFunction(utsTitle, utsBattery, utsData);

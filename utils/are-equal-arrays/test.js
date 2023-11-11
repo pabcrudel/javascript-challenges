@@ -2,6 +2,7 @@
 
 const { areStrictEqualArraysNonRecursive } = require('./main.js');
 const { stringifyArray } = require('../stringify-array/main.js');
+const { utsFunction } = require("../unit-testings/main.js");
 
 const utObj1 = { a: 3, b: "", c: null };
 const utObj2 = { a: 3, b: "", c: null };
@@ -20,7 +21,7 @@ const utArr6 = [utObj3, 3];
  * - [3]: Expected Equality
  * - [4]: Description
  */
-const utBattery = [
+const utsBattery = [
   [ [1, 2, 3, 4], [1, 2, 3, 4], true, ],
   [ [1, null, 3, 4], [1, 2, 3, 4], false, ],
   [ [1, 2, 3], [1, 2, 3, 4], false ],
@@ -50,42 +51,26 @@ const utBattery = [
     true
   ]
 ];
+const utsTitle = "Equal Array";
+const utsData = [
+  {
+    utTitle: "Are strict equal primitive Array",
+    utOutputHeadings: [
+      "Number", "Status", "Arr 1", "Arr 2", "Expected Equality", "Equality"
+    ],
+    utFunction: function(testNumber, utItem){
+      const [ arr1, arr2, expected ] = utItem;
 
-console.log("# Unit Testing: Equal Array\n");
-console.log(
-  "Disclaimer: In order to see the array in one line, it has been " +
-  "used \`JSON.stringify\` which transforms \`<empty slot>\`, " +
-  " into \`undefined\`.\n"
-);
-ut(
-  "Are strict equal primitive Array",
-  utBattery,
-  areStrictEqualArraysNonRecursive
-);
-
-function ut(title, uts, utFunction) {
-  console.log(`## UT: ${title}\n`);
-  console.log("| Number | Status | Arr 1 | Arr 2 " +
-  "| Expected Equality | Equality |");
-  console.log("|-|-|-|-|-|-|");
-
-  let failCounter = 0;
-  for (let i = 0; i < uts.length; i++) {
-    const ut = uts[i];
-
-    const arr1 = ut[0];
-    const arr2 = ut[1];
-    const equality = utFunction(arr1, arr2);
-
-    const expected = ut[2];
-    const status = equality === expected;
-    const statusLog = status ? "Pass" : "Fail";
-
-    console.log(`| ${i + 1} | ${statusLog} |`,stringifyArray(arr1),
-      "|",stringifyArray(arr2),`| ${expected} | ${equality} |`);
-
-    // Because of "!", True = 0 & False = 1;
-    failCounter += !status;
-  };
-  console.log("\nFails:", failCounter);
-};
+      const equality = areStrictEqualArraysNonRecursive(arr1, arr2);
+      const status = equality === expected;
+      const statusLog = status ? "Pass" : "Fail";
+  
+      console.log(`| ${testNumber} | ${statusLog} |`,stringifyArray(arr1),
+        "|",stringifyArray(arr2),`| ${expected} | ${equality} |`);
+  
+      // Because of "!", True = 0 & False = 1;
+      return !status;
+    },
+  }
+];
+utsFunction(utsTitle, utsBattery, utsData);
