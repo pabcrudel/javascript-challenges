@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uppsercast constants</title>
+</head>
+<body>
+  <h1>Uppsercast constants</h1>
+  
+  <script>
+    // In uppercase because is "hard-coded" & I know that before execution
+    const BIRTHDAY = "1996-06-28";
+
+    function getAge(birthday) {
+      const date = new Date();
+
+      const birthYear = birthday.substring(0, birthday.search("-"));
+
+      return date.getFullYear() - birthYear;
+    };
+
+    // Is in lowercase because it's value is calculated in a function.
+    const age = getAge(BIRTHDAY);
+    console.log(age);
+  </script>
+</body>
+</html>
