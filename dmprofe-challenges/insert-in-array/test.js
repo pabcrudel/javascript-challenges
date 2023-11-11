@@ -52,11 +52,11 @@ const utsBattery = [
 ];
 const utsTitle = "Insert in Array";
 const utOutputHeadings = [
-  "Number", "Status", "originalArr", "indexThatIsBefore",
-  "arrayOrPrimitiveToInsert", "Expected Array", "Result",
+  "originalArr", "indexThatIsBefore", "arrayOrPrimitiveToInsert",
+  "Expected Array", "Result",
 ];
 
-function insertUtFunction(testNumber, utItem, fnVersion) {
+function insertUtFunction(utItem, fnVersion) {
   const [ originalArr, indexBefore, insert, expected ] = utItem;
 
   let result;
@@ -72,30 +72,25 @@ function insertUtFunction(testNumber, utItem, fnVersion) {
       break;
   };
 
-  const equality = areStrictEqualArraysNonRecursive(expected, result);
-  const statusLog = equality ? "Pass" : "Fail";
+  const status = areStrictEqualArraysNonRecursive(expected, result);
 
-  console.log(
-    `| ${testNumber} | ${statusLog} |`,stringifyArray(originalArr),
-    `| ${indexBefore} |`,stringifyArray(insert),"|",
-    stringifyArray(expected), "|",
-    stringifyArray(result), "|"
-  );
+  const message = stringifyArray(originalArr) + " | " + indexBefore + " | " +
+    stringifyArray(insert) + " | " + stringifyArray(expected) + " | " +
+    stringifyArray(result);
 
-  // Because of "!", True = 0 & False = 1;
-  return !equality;
+  return {status, message};
 };
 
 const utsData = [
   {
     utTitle: "Return new array",
     utOutputHeadings,
-    utFunction: (testNumber, utItem) => insertUtFunction(testNumber, utItem, 1),
+    utFunction: (utItem) => insertUtFunction(utItem, 1),
   },
   {
     utTitle: "Insert in place",
     utOutputHeadings,
-    utFunction: (testNumber, utItem) => insertUtFunction(testNumber, utItem, 2),
+    utFunction: (utItem) => insertUtFunction(utItem, 2),
   }
 ];
 utsFunction(utsTitle, utsBattery, utsData);

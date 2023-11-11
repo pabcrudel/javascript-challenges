@@ -15,14 +15,22 @@ function utsFunction(utsTitle, utsBattery, utsData) {
 
       console.log(`\n## UT: ${utTitle}\n`);
     
-      const headings = "| " + utOutputHeadings.join(" | ") + " |";
-      let headingLine = "|";
+      const headings = `| Number | Status | ${utOutputHeadings.join(" | ")} |`;
+      let headingLine = "| - | - |";
       for (let i = 0; i < utOutputHeadings.length; i++) headingLine += " - |";
       console.log(`${headings}\n${headingLine}`);
 
       let failCounter = 0;
-      for (let i = 0; i < utsBattery.length; i++)
-        failCounter += utFunction(i + 1, utsBattery[i]);
+      for (let i = 0; i < utsBattery.length; i++) {
+        const { status, message } = utFunction(utsBattery[i]);
+
+        const statusLog = status ? "Pass" : "Fail";
+
+        console.log(`| ${i + 1} | ${statusLog} | ${message} |`);
+
+        // Because of "!", True = 0 & False = 1;
+        failCounter += !status;
+      };
       console.log("\nFails:", failCounter);
     };
   };

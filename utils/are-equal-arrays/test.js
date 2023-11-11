@@ -55,21 +55,17 @@ const utsTitle = "Equal Array";
 const utsData = [
   {
     utTitle: "Are strict equal primitive Array",
-    utOutputHeadings: [
-      "Number", "Status", "Arr 1", "Arr 2", "Expected Equality", "Equality"
-    ],
-    utFunction: function(testNumber, utItem){
+    utOutputHeadings: ["Arr 1", "Arr 2", "Expected Equality", "Equality"],
+    utFunction: function(utItem){
       const [ arr1, arr2, expected ] = utItem;
 
       const equality = areStrictEqualArraysNonRecursive(arr1, arr2);
       const status = equality === expected;
-      const statusLog = status ? "Pass" : "Fail";
   
-      console.log(`| ${testNumber} | ${statusLog} |`,stringifyArray(arr1),
-        "|",stringifyArray(arr2),`| ${expected} | ${equality} |`);
+      const message = stringifyArray(arr1) + " | " + stringifyArray(arr2) +
+        " | " + expected + " | " + equality;
   
-      // Because of "!", True = 0 & False = 1;
-      return !status;
+      return {status, message};
     },
   }
 ];

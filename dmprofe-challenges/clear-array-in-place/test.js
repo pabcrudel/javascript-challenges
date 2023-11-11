@@ -31,25 +31,19 @@ const utsTitle = "Clean Array";
 const utsData = [
   {
     utTitle: "Deep cleaning (recursive)",
-    utOutputHeadings: [
-      "Number", "Status", "Original Arr", "Expected Arr", "Result Arr",
-    ],
-    utFunction: function(testNumber, utItem){
+    utOutputHeadings: ["Original Arr", "Expected Arr", "Result Arr"],
+    utFunction: function(utItem){
       const [ originalArr, expected ] = utItem;
   
       const result = [...originalArr];
       cleanArrayInPlace(result);
   
       const status = areStrictEqualArraysNonRecursive(expected, result);
-      const statusLog = status ? "Pass" : "Fail";
   
-      console.log(`| ${testNumber} | ${statusLog} |`,
-        stringifyArray(originalArr), "|",stringifyArray(expected),"|",
-        stringifyArray(result)
-      );
+      const message = stringifyArray(originalArr) + " | " +
+        stringifyArray(expected) + " | " + stringifyArray(result);
   
-      // Because of "!", True = 0 & False = 1;
-      return !status;
+      return {status, message};
     },
   }
 ];
