@@ -1,7 +1,7 @@
 "use strict";
 
 /** Stringify arrays in JSON format avoiding Markdown rendering errors and
- * non nullish values representations. */
+ * nullish values wrong representations. */
 function stringifyArray(arr) {
   const stringArr =
     JSON.stringify(arr, (key, value) => stringifyNullish(value), 0);
