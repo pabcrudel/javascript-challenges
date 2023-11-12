@@ -1,12 +1,31 @@
 "use strict";
 
 /**
-cleanArrayInPlace(arrayIn);
+  cleanArrayInPlace(arrayIn);
+
+  Removes the entries of the input array that have value null or undefined or
+  "empty" entries.
+
+  Does not assume array of primitives, but does not work recursively.
+*/
+function cleanArrayInPlace(arrayIn) {
+  /** Actual length of the array */
+  let actualLength = 0;
+
+  for (const item of arrayIn)
+    if (item !== null && item !== undefined)
+      arrayIn[actualLength++] = item;
+
+  arrayIn.length = actualLength;
+};
+
+/**
+deepCleanArrayInPlace(arrayIn);
 
 Removes the entries of the input array that have value null or undefined
 or "empty" entries.
 */
-function cleanArrayInPlace(arrayIn) {
+function deepCleanArrayInPlace(arrayIn) {
   /** Infinite loop locker because of recursive function. */
   let hasPassed = false;
   for (let i = 0; i < arrayIn.length;) {
