@@ -6,26 +6,37 @@ const { areStrictEqualArraysNonRecursive } =
 const { stringifyArray } = require('../../utils/stringify-array/main.js');
 const { utsFunction } = require("../../utils/unit-testings/main.js");
 
+const arr1 = [2,4,undefined, null];
+const arr2 = [ 7, 8, [null], null, 9 ];
+const arr3 = [undefined, ""];
+const arr4 = [ [null], {}, ];
+const arr5 = [];
+const arr6 = [undefined, null];
+const arr7 = [ [""], null, ];
+const arr8 = [ 7, 8, [null], null, 9 ];
+
+const obj1 = { a: 6 };
+
 /** Unit Testings
  * - [0] Raw Array
  * - [1] Expected Clean Array
  */
 const utsBattery = [
   [
-    [
-      3, , [2,4,undefined, null], , 4, undefined, 5, null,
-      { a: 6 }, [ 7, 8, [null], null, 9 ], 10
-    ],
-    [3, [2,4], 4, 5, { a: 6 }, [ 7, 8, 9 ], 10]
+    [3, , arr1, , 4, undefined, 5, null, obj1, arr2, 10],
+    [3, arr1, 4, 5, obj1, arr2, 10]
   ],
+  [ [NaN, arr3, , arr5, arr4], [NaN, arr3, arr5, arr4] ],
+  [ [, arr6, , NaN, arr7, undefined], [arr6, NaN, arr7] ],
   [
-    [NaN, [undefined, ""], , [],[ [null], {}, ],],
-    [[{}]],
+    [ 3, , , , 4, undefined, 5, null, obj1, arr8, 10 ],
+    [ 3, 4, 5, obj1, arr8, 10 ]
   ],
-  [
-    [, [undefined, null], , NaN,[ [""], null, ],],
-    [],
-  ],
+  [ [null, 3, , 5, undefined], [3, 5] ],
+  [ [], [] ],
+  [ [null, undefined, ,], [] ],
+  [ [3, null, undefined, , 5], [3, 5] ],
+  [ [1,2,3,,null,,4,,undefined,5], [1,2,3,4,5] ]
 ];
 const utsTitle = "Clean Array";
 const utsData = [
