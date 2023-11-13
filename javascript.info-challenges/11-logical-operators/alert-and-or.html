@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alert and or</title>
+</head>
+<body>
+  <h1>Alert and or</h1>
+  
+  <script>
+    //# The result of OR AND OR
+
+    //What will the result be?
+
+    alert( null || 2 && 3 || 4 );
+    /*
+    && has precedence, so (2 && 3) is evaluate first => 3;
+    The next round -> all || so it search truthy.
+    null is falsy, then 3 is truthy, so 4 is not evaluated.
+    The result is 3.
+    */
+  </script>
+</body>
+</html>

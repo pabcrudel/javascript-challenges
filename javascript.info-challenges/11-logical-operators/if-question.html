@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>If question</title>
+</head>
+<body>
+  <h1>If question</h1>
+  
+  <script>
+    //# A question about "if"
+
+    /*
+      Which of these `alert`s are going to execute?
+
+      What will the results of the expressions be inside `if(...)`?
+    */
+
+    if (-1 || 0) alert( 'first' ); // first, because -1 is truthy and stops.
+    if (-1 && 0) alert( 'second' ); // none, because 0 is falsy.
+    if (null || -1 && 1) alert( 'third' );
+    // third, because (-1 && 1) is truthy, and then (null || 1) is truthy too.
+  </script>
+</body>
+</html>

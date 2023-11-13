@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check if outside range</title>
+</head>
+<body>
+  <h1>Check if outside range</h1>
+  
+  <script>
+    //# Check the range outside
+
+    /*
+      Write an `if` condition to check that `age` 
+      is NOT between `14` and `90` inclusively.
+
+      Create two variants: the first one using NOT 
+      `!`, the second one -- without it.
+    */
+
+    const age = 10;
+
+    if (!(age >= 14) || !(age <= 90)) alert(age + " is outside the range");
+
+    if (age < 14 || age > 90) alert(age + " is outside the range");
+  </script>
+</body>
+</html>

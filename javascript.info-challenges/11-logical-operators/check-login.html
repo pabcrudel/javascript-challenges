@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check login</title>
+</head>
+<body>
+  <h1>Check login</h1>
+  
+  <script>
+    //# Check the login
+
+    /*
+    Write the code which asks for a login with `prompt`.
+
+    If the visitor enters `"Admin"`, then `prompt` for a password, 
+    if the input is an empty line or `key:Esc` -- show "Canceled", 
+    if it's another string -- then show "I don't know you".
+
+    The password is checked as follows:
+
+    - If it equals "TheMaster", then show "Welcome!",
+    - Another string -- show "Wrong password",
+    - For an empty string or cancelled input, show "Canceled"
+
+    Please use nested `if` blocks. Mind the overall readability of the code.
+
+    Hint:  passing an empty input to a prompt returns an empty string `''`. 
+    Pressing `key:ESC` during a prompt returns `null`.
+    */
+
+    const userName = prompt("Type your username", "");
+
+    if (userName === "Admin") {
+      const password = prompt("Enter your password", "");
+
+      if (password === "TheMaster") alert("Welcome");
+      else if (password === '' || password === null) alert("Canceled");
+      else alert("Wrong password");
+    }
+    else if (userName === '' || userName === null) alert("Canceled");
+    else alert("I don't know you");
+  </script>
+</body>
+</html>
