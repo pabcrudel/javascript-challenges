@@ -5,6 +5,7 @@
   "description": "Facing some JS challenges in order to improve my JS skills",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "commonjs",
   "private": true,
   "repository": {
     "type": "git",
