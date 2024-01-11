@@ -5,10 +5,7 @@ const { areStrictEqualArraysNonRecursive } =
   require('../../utils/are-equal-arrays/main.js');
 
 const mocks = [
-  {
-    raw: [3, 2, 1],
-    ordered: [1, 2, 3]
-  }
+  { raw: [3, 2, 1], ordered: [1, 2, 3] }
 ];
 
 /** Unit Testings
