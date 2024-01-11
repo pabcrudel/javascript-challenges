@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /*
 insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
@@ -10,8 +10,8 @@ other array).
 Assume that the arrays are of primitives.
 */
 
-function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
-  let insertedArray = [];
+function insertInArray (arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
+  const insertedArray = [];
 
   for (let i = 0, j = 0; i < arrayIn.length; i++, j++) {
     insertedArray[j] = arrayIn[i];
@@ -24,16 +24,15 @@ function insertInArray(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert) {
         arrayOrPrimitiveToInsert === null
       ) {
         insertedArray[++j] = arrayOrPrimitiveToInsert;
-      }
-      // Case 2: Is an Array
-      else {
-        for (let k = 0; k < arrayOrPrimitiveToInsert.length; k++)
+      } else { // Case 2: Is an Array
+        for (let k = 0; k < arrayOrPrimitiveToInsert.length; k++) {
           insertedArray[++j] = arrayOrPrimitiveToInsert[k];
-      };
-    };
-  };
+        }
+      }
+    }
+  }
   return insertedArray;
-};
+}
 
 /*
 insertInArrayInPlace(arrayIn, indexThatIsBefore, arrayOrPrimitiveToInsert)
@@ -42,10 +41,10 @@ Same as `insert-in-array.js`, but modifies the input array in place,
 and does not return anything.
 */
 
-function insertInArrayInPlace(
+function insertInArrayInPlace (
   arrayInOut, indexThatIsBefore, arrayOrPrimitiveToInsert
 ) {
-  let insertedArray = [];
+  const insertedArray = [];
   const position = indexThatIsBefore + 1;
 
   for (let i = position, j = 0; i < arrayInOut.length; i++) {
@@ -58,22 +57,20 @@ function insertInArrayInPlace(
       ) {
         insertedArray[i] = arrayOrPrimitiveToInsert;
         j++;
-      }
-      // Case 2: Is an Array
-      else {
-        for (; j < arrayOrPrimitiveToInsert.length; j++)
+      } else { // Case 2: Is an Array
+        for (; j < arrayOrPrimitiveToInsert.length; j++) {
           insertedArray[i + j] = arrayOrPrimitiveToInsert[j];
-      };
-    };
+        }
+      }
+    }
 
     // Insert rest of arrayIn
-    if (i >= position)
-      insertedArray[i + j] = arrayInOut[i];
-  };
+    if (i >= position) { insertedArray[i + j] = arrayInOut[i]; }
+  }
 
   for (let i = position; i < insertedArray.length; i++) {
     arrayInOut[i] = insertedArray[i];
-  };
-};
+  }
+}
 
 module.exports = { insertInArray, insertInArrayInPlace };

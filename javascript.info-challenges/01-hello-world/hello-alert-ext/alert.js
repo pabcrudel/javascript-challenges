@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
-const greet = "I'm Javascript";
-alert(greet);
+const greet = 'I\'m Javascript';
+window.alert(greet);
