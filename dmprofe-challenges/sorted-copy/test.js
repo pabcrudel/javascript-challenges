@@ -16,18 +16,9 @@ const mocks = [
  * - [1] Expected ordered Array
  */
 const utsBattery = [
-  [
-    mocks[0].raw,
-    mocks[0].raw
-  ],
-  [
-    mocks[0].ordered,
-    mocks[0].ordered
-  ],
-  [
-    mocks[0].raw,
-    mocks[0].ordered
-  ]
+  [mocks[0].raw, mocks[0].raw],
+  [mocks[0].ordered, mocks[0].ordered],
+  [mocks[0].raw, mocks[0].ordered]
 ];
 
 function utsFunction (utsBattery) {
