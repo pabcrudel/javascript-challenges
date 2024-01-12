@@ -1,7 +1,7 @@
 'use strict';
 
 function sortedCopy (arr) {
-  return structuredClone(arr);
+  return [...arr];
 }
 
 module.exports = { sortedCopy };
