@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create tree list</title>
+</head>
+
+<body>
+  <div id="tree"></div>
+
+  <script>
+    const data = {
+      "Fish": {
+        "trout": {},
+        "salmon": {}
+      },
+      "Tree": {
+        "Huge": {
+          "sequoia": {},
+          "oak": {}
+        },
+        "Flowering": {
+          "apple tree": {},
+          "magnolia": {}
+        }
+      }
+    };
+
+    function createTree(container, data) {
+      if (Object.entries(data).length) {
+        const ul = document.createElement('ul');
+        container.append(ul);
+  
+        for (const key in data) {
+          const li = document.createElement('li');
+          li.textContent = key;
+          ul.append(li);
+  
+          const value = data[key];
+          if (typeof value === 'object') createTree(li, value);
+        }
+      }
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+</body>
+
+</html>

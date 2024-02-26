@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create list</title>
+</head>
+<body>
+  <script>
+    const ul = document.createElement('ul');
+    document.body.append(ul);
+
+    while (true) {
+      const content = prompt('Type the content of this item');
+      if (!content) break;
+
+      const li = document.createElement('li');
+      li.textContent = content;
+      ul.append(li);
+    }
+  </script>
+</body>
+</html>
