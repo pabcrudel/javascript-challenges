@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Output every second</title>
+</head>
+
+<body>
+  <script>
+    function printNumbersWithTimeout(from, to) {
+      // Copied from solution
+      setTimeout(function go() {
+        alert(from);
+        if (from < to) {
+          from++;
+          setTimeout(go, 1000);
+        }
+      }, 1000);
+    }
+
+    function printNumbersWithInterval(from, to) {
+      let id = setInterval(
+        () => {
+          if (from === to) clearInterval(id);
+          console.log(from++);
+        },
+        1000
+      );
+    }
+
+    printNumbersWithTimeout(2, 7);
+    // printNumbersWithInterval(2, 7);
+  </script>
+</body>
+
+</html>
