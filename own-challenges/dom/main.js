@@ -26,15 +26,17 @@ const printedList = document.createElement('ul');
 });
 body.append(printedList);
 
-const backupList = printedList.cloneNode(true);
-
 // Sort users
 const collator = new Intl.Collator('es', { usage: 'sort' });
 
-const userItems = Array.from(body.querySelectorAll('li'));
-userItems.slice()
+Array.from(body.querySelectorAll('li')).slice()
   .sort((a, b) => collator.compare(a.innerText, b.innerText))
   .forEach(user => printedList.append(user));
+
+/* Create a backup of the sorted list
+ * - At this point, `printedList` was ordered
+*/
+const backupList = printedList.cloneNode(true);
 
 // Move the clicked user to the first position
 printedList.onclick = moveFirst;
