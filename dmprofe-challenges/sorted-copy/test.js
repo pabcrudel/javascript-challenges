@@ -4,10 +4,20 @@ const { sortedCopy } = require('./main.js');
 const { areStrictEqualArraysNonRecursive } =
   require('../../utils/are-equal-arrays/main.js');
 
-const mocks = [
+const objMocks = {
+  pablo: { name: 'Pablo', age: 27 },
+  daniel: { name: 'Daniel', age: 20 },
+  random: { name: 'anonymous', age: NaN }
+};
+
+const arrMocks = [
   {
-    raw: [3, 2, 1],
-    ordered: [1, 2, 3]
+    raw: [objMocks.pablo, objMocks.daniel],
+    ordered: [objMocks.daniel, objMocks.pablo]
+  },
+  {
+    raw: [objMocks.pablo, objMocks.random],
+    ordered: [objMocks.pablo, objMocks.random]
   }
 ];
 
@@ -17,16 +27,20 @@ const mocks = [
  */
 const utsBattery = [
   [
-    mocks[0].raw,
-    mocks[0].raw
+    arrMocks[0].raw,
+    arrMocks[0].raw
   ],
   [
-    mocks[0].ordered,
-    mocks[0].ordered
+    arrMocks[0].ordered,
+    arrMocks[0].ordered
   ],
   [
-    mocks[0].raw,
-    mocks[0].ordered
+    arrMocks[0].raw,
+    arrMocks[0].ordered
+  ],
+  [
+    arrMocks[1].raw,
+    arrMocks[1].ordered
   ]
 ];
 

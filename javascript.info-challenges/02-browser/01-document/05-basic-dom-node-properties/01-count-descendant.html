@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Count Descendant</title>
+</head>
+
+<body>
+  <ul>
+    <li>Animals
+      <ul>
+        <li>Mammals
+          <ul>
+            <li>Cows</li>
+            <li>Donkeys</li>
+            <li>Dogs</li>
+            <li>Tigers</li>
+          </ul>
+        </li>
+        <li>Other
+          <ul>
+            <li>Snakes</li>
+            <li>Birds</li>
+            <li>Lizards</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Fishes
+      <ul>
+        <li>Aquarium
+          <ul>
+            <li>Guppy</li>
+            <li>Angelfish</li>
+          </ul>
+        </li>
+        <li>Sea
+          <ul>
+            <li>Sea trout</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    /*
+    There’s a tree structured as nested ul/li.
+
+    Write the code that for each <li> shows:
+
+    - What’s the text inside it (without the subtree) */
+
+    const liList = document.querySelectorAll('li');
+    for (const li of liList) {
+      console.log(li.firstChild.data.trim());
+
+    // - The number of nested <li> – all descendants, including the deeply
+    //   nested ones.
+
+      console.log(li.querySelectorAll('li').length);
+    }
+  </script>
+</body>
+
+</html>

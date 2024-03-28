@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hide on click</title>
+</head>
+<body>
+  <input type="button" id="hider" value="Click to hide the text" />
+
+  <div id="text">Text</div>
+
+  <script>
+    const input = document.querySelector('input');
+    input.onclick = () => document.getElementById('text').hidden = true;
+  </script>
+</body>
+</html>

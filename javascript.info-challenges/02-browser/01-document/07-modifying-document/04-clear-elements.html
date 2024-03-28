@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear elements</title>
+</head>
+
+<body>
+  <ol id="elem">
+    text
+    <li>Hello</li>
+    <li>World</li>
+  </ol>
+
+  <script>
+    /*
+    function clear(elem) { your code }
+
+    clear(elem); // clears the list
+    */
+    function clear(elem) {
+      // Only removes nodes
+      // const children = elem.querySelectorAll('*');
+      // for (const child of children) child.remove();
+
+      // Remove all
+      elem.innerHTML = '';
+    }
+
+    clear(elem);
+  </script>
+</body>
+
+</html>
