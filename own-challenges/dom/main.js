@@ -104,18 +104,16 @@ function fuzzySearchEventFactory (listItems) {
 }
 
 // Add border to a clicked user
-printedList.addEventListener('click', event => {
+printedList.onclick = highlightItemEvent;
+
+/** @param {MouseEvent} event */
+function highlightItemEvent (event) {
   const target = event.target;
 
-  if (target?.nodeName !== 'LI') return;
+  if (target.nodeName !== 'LI') return;
 
-  // for (const li of event.currentTarget.querySelectorAll('li')) {
-  //   li.style.border =
-  //     li === target && !li.style.border.length ? '1px solid red' : '';
-  // }
-
-  target.style.border = target.style.border.length ? '' : '1px solid red';
-});
+  target.style.border = target.style.border ? '' : '1px solid red';
+}
 
 // Modify text content each 2 seconds
 const words = ['DOM', 'Web', 'JavaScript'];
