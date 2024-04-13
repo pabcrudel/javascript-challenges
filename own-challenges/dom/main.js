@@ -113,3 +113,15 @@ setInterval(() => {
   h1.textContent =
     h1.textContent.replace(/(, ).*(!)/, `$1${words[wordIndex]}$2`);
 }, 2000);
+
+// Create an observer instance
+const observer = new globalThis.IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const { isIntersecting, target: { nodeName } } = entry;
+    const message = 'is' + (isIntersecting ? '' : "n't");
+
+    console.log(nodeName, message, 'visible');
+  });
+});
+observer.observe(addInput);
+// observer.unobserve(addInput); Stops the observer
