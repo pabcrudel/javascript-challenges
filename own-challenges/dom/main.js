@@ -40,11 +40,6 @@ function sortNodeList (nodeList, locale = 'es') {
 }
 sortNodeList(printedList.childNodes);
 
-/* Create a backup of the sorted list
- * - At this point, `printedList` was ordered
-*/
-const backupList = printedList.cloneNode(true);
-
 // Move the clicked user to the first position
 printedList.onclick = moveFirst;
 
