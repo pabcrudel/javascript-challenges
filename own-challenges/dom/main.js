@@ -50,10 +50,10 @@ printedList.onclick = moveFirst;
 
 /** @param {MouseEvent} event */
 function moveFirst (event) {
-  const target = event.target;
+  const { target, currentTarget } = event;
 
   if (target?.nodeName !== 'LI') return;
-  printedList.prepend(target);
+  currentTarget.prepend(target);
 }
 
 // Show an input to add new users
