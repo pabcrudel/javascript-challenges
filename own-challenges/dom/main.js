@@ -77,25 +77,26 @@ const searchInput = document.createElement('input');
 searchInput.name = 'searchUser';
 searchInput.type = 'search';
 searchInput.placeholder = 'Search a user';
+searchInput.oninput = fuzzySearchEventFactory(printedList.children);
+printedList.before(searchInput);
 
-// 'keyup' should trigger on 'shift'
-searchInput.addEventListener('input', event => {
-  const searchTerm = event?.target?.value?.toLowerCase();
-  printedList.innerHTML = ''; // Nuke
+/** @param {HTMLCollectionOf<HTMLLIElement>} listItems */
+function fuzzySearchEventFactory (listItems) {
+  /** @param {InputEvent} event */
+  return function fuzzySearch (event) {
+    const searchTerm = event?.target?.value?.toLowerCase();
 
-  if (searchTerm) {
-    for (const user of backupList.childNodes) {
-      if (user.innerText.toLowerCase().includes(searchTerm)) {
-        printedList.append(user.cloneNode(true));
+    for (const listItem of listItems) {
+      if (!searchTerm || listItem.innerText.toLowerCase().includes(searchTerm)) {
+        listItem.hidden = false;
+        listItem.ariaHidden = 'false';
+      } else {
+        listItem.hidden = true;
+        listItem.ariaHidden = 'true';
       }
     }
-  } else {
-    for (const user of backupList.childNodes) {
-      printedList.append(user.cloneNode(true));
-    }
-  }
-});
-printedList.before(searchInput);
+  };
+}
 
 // Add border to a clicked user
 printedList.addEventListener('click', event => {
