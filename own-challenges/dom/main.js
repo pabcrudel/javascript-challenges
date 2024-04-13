@@ -61,16 +61,26 @@ const addInput = document.createElement('input');
 addInput.name = 'addUser';
 addInput.type = 'text';
 addInput.placeholder = 'Add a user to the list';
-addInput.addEventListener('keypress', event => {
-  if (event.key === 'Enter') {
-    const li = document.createElement('li');
-    li.textContent = addInput.value;
-    addInput.value = '';
-    backupList.append(li.cloneNode(true));
-    printedList.append(li);
-  }
-});
+addInput.onkeyup = addListItemEvenFactory(printedList);
 printedList.after(addInput);
+
+/** @param {HTMLUListElement} listElement */
+function addListItemEvenFactory (listElement) {
+  /** @param {KeyboardEvent} event */
+  return function keyPressEvent (event) {
+    if (event.key !== 'Enter') return;
+
+    // Create list item
+    const li = document.createElement('li');
+    li.textContent = event.target.value;
+
+    // Clear input
+    event.target.value = '';
+
+    // Add item to the list
+    listElement.append(li);
+  };
+}
 
 // Search users
 const searchInput = document.createElement('input');
