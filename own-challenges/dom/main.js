@@ -27,11 +27,18 @@ const printedList = document.createElement('ul');
 body.append(printedList);
 
 // Sort users
-const collator = new Intl.Collator('es', { usage: 'sort' });
+/**
+ * @param {NodeList} nodeList
+ * @param {Intl.LocalesArgument} locale
+*/
+function sortNodeList (nodeList, locale = 'es') {
+  const collator = new Intl.Collator(locale, { usage: 'sort', sensitivity: 'base' });
 
-Array.from(body.querySelectorAll('li')).slice()
-  .sort((a, b) => collator.compare(a.innerText, b.innerText))
-  .forEach(user => printedList.append(user));
+  Array.from(nodeList)
+    .sort((a, b) => collator.compare(a.innerText, b.innerText))
+    .forEach(user => printedList.append(user));
+}
+sortNodeList(printedList.childNodes);
 
 /* Create a backup of the sorted list
  * - At this point, `printedList` was ordered
