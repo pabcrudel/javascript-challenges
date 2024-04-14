@@ -52,29 +52,150 @@ function moveFirst (event) {
 }
 
 // Show an input to add new users
+const addUserForm = document.createElement('form');
 const addInput = document.createElement('input');
 addInput.name = 'addUser';
 addInput.type = 'text';
 addInput.placeholder = 'Add a user to the list';
-addInput.onkeyup = addListItemEvenFactory(printedList);
-printedList.after(addInput);
+addUserForm.append(addInput);
 
-/** @param {HTMLUListElement} listElement */
-function addListItemEvenFactory (listElement) {
-  /** @param {KeyboardEvent} event */
+/**
+ * @typedef {Object} TYPE_POSITIONS
+ * @property {'top'} TOP
+ * @property {'bottom'} BOTTOM
+ * @property {'ordered'} ORDERED
+ */
+
+/** @type {TYPE_POSITIONS} */
+const POSITIONS = {
+  ORDERED: 'ordered',
+  TOP: 'top',
+  BOTTOM: 'bottom'
+};
+
+[
+  {
+    inputId: POSITIONS.ORDERED,
+    labelCaption: 'Ordered',
+    isChecked: true
+  },
+  {
+    inputId: POSITIONS.TOP,
+    labelCaption: 'At the beginning of the list'
+  },
+  {
+    inputId: POSITIONS.BOTTOM,
+    labelCaption: 'At the end of the list'
+  }
+].forEach(config => {
+  const wrap = document.createElement('div');
+
+  const { input, label } = createRadioElement({ inputName: 'position', ...config });
+  wrap.append(input, label);
+
+  addUserForm.append(wrap);
+});
+
+addUserForm.onsubmit = addListItemEventFactory(printedList, POSITIONS, addInput.name);
+printedList.after(addUserForm);
+
+/**
+ * @param {Object} config
+ * @param {string} config.inputId
+ * @param {string} [config.inputName=config.inputId]
+ * @param {string} [config.inputValue=config.inputId]
+ * @param {boolean} [config.isChecked=false]
+ * @param {string} config.labelCaption
+ */
+function createRadioElement ({
+  inputId,
+  inputName = inputId,
+  inputValue = inputId,
+  isChecked = false,
+  labelCaption
+}) {
+  const input = document.createElement('input');
+  input.id = inputId;
+  input.name = inputName;
+  input.value = inputValue;
+  input.type = 'radio';
+  input.checked = isChecked;
+
+  const label = document.createElement('label');
+  label.htmlFor = inputId;
+  label.textContent = labelCaption;
+
+  return { input, label };
+}
+
+/**
+ * @param {HTMLUListElement} listElement
+ * @param {TYPE_POSITIONS} POSITIONS
+ * @param {string} addInputName
+ */
+function addListItemEventFactory (listElement, POSITIONS, addInputName) {
+  /** @param {SubmitEvent} event */
   return function keyPressEvent (event) {
-    if (event.key !== 'Enter') return;
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    const user = formData.get('addUser');
+    const position = formData.get('position');
+
+    if (!user || !position) return;
 
     // Create list item
     const li = document.createElement('li');
-    li.textContent = event.target.value;
+    li.textContent = user;
 
     // Clear input
-    event.target.value = '';
+    event.target.children[addInputName].value = null;
 
     // Add item to the list
-    listElement.append(li);
+    switch (position) {
+      case POSITIONS.TOP:
+        listElement.prepend(li);
+        break;
+      case POSITIONS.ORDERED:
+        insertItemOrdered(listElement.children, li);
+        break;
+      case POSITIONS.BOTTOM:
+        listElement.append(li);
+        break;
+      default:
+        break;
+    }
   };
+}
+
+/**
+ * @param {HTMLCollectionOf<HTMLLIElement>} listItems
+ * @param {HTMLLIElement} listItem
+ * @param {string} locale
+ */
+function insertItemOrdered (listItems, listItem, locale = 'es') {
+  const collator = new Intl.Collator(locale, { usage: 'sort', sensitivity: 'base' });
+
+  // Binary sort because the original array is already sorted
+  const length = listItems.length;
+  let start = 0;
+  let end = length;
+
+  while (start < end) {
+    const half = Math.floor((start + end) / 2);
+
+    // If the new item should come after the current middle item
+    if (collator.compare(listItems[half].textContent, listItem.textContent) < 0) {
+      start = half + 1; // Move to the right hand of the array
+    } else {
+      end = half; // Move to the left hand of the array
+    }
+  }
+
+  // Avoid index out of bounds by comparing the start position with the current length
+  if (start < length) listItems[start].before(listItem);
+  else listItems[start - 1].after(listItem); // Insert item at the end of the list
 }
 
 // Search users
